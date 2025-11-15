@@ -4,21 +4,30 @@
 //
 //  Created by Keitiely Silva Viana on 15/11/25.
 //
-
 import SwiftUI
 
 struct ContentView: View {
+    
+    @EnvironmentObject var authManager: AuthManager
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        
+        if authManager.isLoggedIn {
+            
+            if authManager.userRole == "Agente" {
+                HomeAgenteView()
+            } else {
+                HomeCoordenadorView()
+                
+            }
+            
+        } else {
+            LoginView()
         }
-        .padding()
     }
 }
 
 #Preview {
     ContentView()
+        .environmentObject(AuthManager()) 
 }

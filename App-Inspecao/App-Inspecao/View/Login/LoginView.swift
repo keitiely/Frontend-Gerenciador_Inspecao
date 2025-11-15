@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct LoginView: View {
-    // escuta o authmanager
+
     @EnvironmentObject var authManager: AuthManager
     @State private var user = ""
     @State private var senha = ""
@@ -17,7 +17,7 @@ struct LoginView: View {
     
     var body: some View {
         VStack {
-            // Header
+ 
 //            Spacer()
             Text("FazAgente")
                 .font(.largeTitle)

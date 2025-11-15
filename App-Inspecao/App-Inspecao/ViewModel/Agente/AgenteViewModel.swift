@@ -12,7 +12,7 @@ import Combine
 class AgenteViewModel: ObservableObject {
     
  
-    @Published var agente: Agente?
+    @Published var agente: User?
     @Published var quadras: [Quadra] = []
     @Published var mesAtual: String = "Fev" //mudar depois
     @Published var isLoading: Bool = false
@@ -40,7 +40,7 @@ class AgenteViewModel: ObservableObject {
         // Por enquanto dados mock
         // para simular a resposta do banco de dados.
             // Simula o agente logado
-            self.agente = Agente(id: "123", nome: "João")
+        self.agente = User(id: "123", nome: "João", role: " ")
  
     
             // Simula a lista de quadras vinda do banco
