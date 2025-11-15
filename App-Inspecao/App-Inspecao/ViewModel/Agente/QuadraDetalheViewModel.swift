@@ -39,9 +39,9 @@ class QuadraDetalheViewModel: ObservableObject {
             
             // Simula a lista de inspeções vinda do banco para esta quadra
             self.inspecoes = [
-                Inspecao(nome: "Inspeção 1", endereco: "Endereço: Quadra 29, Conjunto C, Casa 29"),
-                Inspecao(nome: "Inspeção 2", endereco: "Endereço: Quadra 29, Conjunto C, Casa 30"),
-                Inspecao(nome: "Inspeção 3", endereco: "Endereço: Quadra 29, Conjunto D, Casa 01")
+                Inspecao(nome: "Inspeção 1", endereco: "Endereço: Quadra 29, Conjunto C, Casa 29", statusVisita: .concluida),
+                Inspecao(nome: "Inspeção 2", endereco: "Endereço: Quadra 29, Conjunto C, Casa 30", statusVisita: .concluida),
+                Inspecao(nome: "Inspeção 3", endereco: "Endereço: Quadra 29, Conjunto D, Casa 01", statusVisita: .concluida)
             ]
             
             self.isLoading = false
