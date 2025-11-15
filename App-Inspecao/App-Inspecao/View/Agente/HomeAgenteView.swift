@@ -7,7 +7,7 @@
 import SwiftUI
 
 struct HomeAgenteView: View {
-    
+    @EnvironmentObject var authManager : AuthManager
     @StateObject private var viewModel = AgenteViewModel()
     
     var body: some View {
@@ -15,7 +15,7 @@ struct HomeAgenteView: View {
             VStack(alignment: .leading, spacing: 16) {
                 
                 // Titulo
-                Text("Agente-\(viewModel.agente?.nome ?? "...")")
+                Text("Agente - \(viewModel.agente?.nome ?? "...")")
                     .font(.largeTitle)
                     .fontWeight(.bold)
                     .padding(.horizontal)
@@ -53,10 +53,15 @@ struct HomeAgenteView: View {
             .padding(.top)
             .navigationTitle("") // Oculta o título padrão da barra
             .navigationBarHidden(true) // Esconde a barra inteira
+            
+            .onAppear { //assim que a tela aparecer manda pra viewmodel carregar os dados passando o authmanager
+                viewModel.carregarDados(authManager: authManager)
+            }
         }
     }
 }
 #Preview {
     HomeAgenteView()
+        .environmentObject(AuthManager())
 }
 

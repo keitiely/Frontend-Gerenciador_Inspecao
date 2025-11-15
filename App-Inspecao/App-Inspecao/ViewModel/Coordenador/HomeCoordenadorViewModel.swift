@@ -19,7 +19,7 @@ class HomeCoordenadorViewModel: ObservableObject {
         if let nome = authManager.currentUser?.nome {
             self.nomeCoordenador = nome
         } else {
-            self.nomeCoordenador = "Coordenador"
+            self.nomeCoordenador = "..."
         }
     }
 }

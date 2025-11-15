@@ -10,7 +10,7 @@ struct QuadraCardView: View {
     let quadra: Quadra
     
     private var corDeFundo: Color {
-        return quadra.isPendente ?
+        return quadra.status == .pendente ?
         .red.opacity(0.7) :
         .green.opacity(0.7)
     }
@@ -47,8 +47,23 @@ struct QuadraCardView: View {
 
 #Preview {
     VStack(spacing: 20) {
-        QuadraCardView(quadra: Quadra(numero: 7, numeroInspecoes: 20, isPendente: false))
-    }
-    .padding()
+           // 3. MUDANÇA: O Preview foi atualizado para o novo "molde"
+           QuadraCardView(quadra: Quadra(
+               id: "q1-mock",
+               nome: "Quadra 01",
+               status: .pendente,
+               agenteNome: "Joao",
+               numeroInspecoes: 4
+           ))
+           
+           QuadraCardView(quadra: Quadra(
+               id: "q2-mock",
+               nome: "Quadra 02",
+               status: .concluida,
+               agenteNome: "Joao",
+               numeroInspecoes: 6
+           ))
+       }
+       .padding()
 }
 

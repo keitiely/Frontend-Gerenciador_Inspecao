@@ -11,52 +11,51 @@ import Combine
 @MainActor
 class AuthManager: ObservableObject {
     
-    // O app inteiro vai olhar para essas duas variáveis
-    @Published var isLoggedIn: Bool = false
-    @Published var userRole: String? = "coordenador"
-    private(set) var currentUser: User? = nil
+    @Published private(set) var currentUser: User? = nil
+    
+    var isLoggedIn: Bool {
+        currentUser != nil
+    }
+    
+    var userRole: String? {
+        currentUser?.role
+    }
     
     
     //    Para TESTAR, inicializamos o AuthManager com um
     //    utilizador 'mock' (falso).
     init() {
-        if isLoggedIn {
-            self.currentUser = User(id: "1", nome: "Keitiely", role: "coordenador")
-        }
+        // --- CONTROLO DE TESTE ---
+        // Para testar a HomeCoordenadorView:
+        self.currentUser = User(id: "1", nome: "Keitiely", role: "coordenador")
+        // Para testar a LoginView (VERSÃO FINAL):
+//         self.currentUser = nil
+        // --- FIM DO CONTROLO DE TESTE ---
     }
-    
     
     // Api Service conecta aqui
     func login(email: String, pass: String) async -> Bool {
         
-        // login request no model
         let loginRequest = LoginRequest(email: email, password: pass)
         
         do {
-            // Chama a API (que vamos criar no APIService)
             let loginResponse = try await APIService.shared.login(request: loginRequest)
             
             // SUCESSO!
-            // Atualiza os valores com a resposta REAL do backend
+            // Esta é a ÚNICA linha que muda o estado
             self.currentUser = loginResponse.user
-            self.isLoggedIn = true
-            self.userRole = loginResponse.user.role // O 'role' vem da API
-            
             return true
             
         } catch {
             // FALHA
-            self.isLoggedIn = false
-            self.userRole = nil
             self.currentUser = nil
-            print("Erro no login: \(error)") // Mostra o erro na console
+            print("Erro no login: \(error)")
             return false
         }
     }
     
     func logout() {
-        self.isLoggedIn = false
-        self.userRole = nil
-        self.currentUser = nil // Limpa o utilizador
+        self.currentUser = nil
     }
 }
+

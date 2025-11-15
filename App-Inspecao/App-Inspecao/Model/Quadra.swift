@@ -4,23 +4,40 @@
 //
 //  Created by Keitiely Silva Viana on 15/11/25.
 //
-
 import Foundation
-struct Quadra: Identifiable {
-    let id = UUID()
-    let numero: Int
-    let numeroInspecoes: Int
-    let isPendente: Bool   // O booleano que virá do banco de dados
-    
 
+// 1. Adicionamos 'Codable' para a API
+struct Quadra: Codable, Identifiable {
+    let id: String
+    let nome: String
+    let status: QuadraStatus
+    let agenteNome: String?
+    let numeroInspecoes: Int
     
-    // Retorna o nome formatado (ex: "Quadra-07")
-    var nomeFormatado: String {
-        return "Quadra-\(String(format: "%02d", numero))"
+    // O Enum de 3 estados que o Coordenador precisa
+    enum QuadraStatus: String, Codable {
+        case naoAtribuida
+        case pendente
+        case concluida
     }
     
-    // Retorna o texto do status baseado no booleano
+    
+    // --- SUAS VARIÁVEIS COMPUTADAS (Atualizadas) ---
+    
+    // 'nomeFormatado' agora só retorna o 'nome'
+    var nomeFormatado: String {
+        return nome
+    }
+    
+    // 'statusTexto' agora lê o 'enum'
     var statusTexto: String {
-        return isPendente ? "Pendente" : "Concluído"
+        switch status {
+        case .naoAtribuida:
+            return "Não Atribuída"
+        case .pendente:
+            return "Pendente"
+        case .concluida:
+            return "Concluído"
+        }
     }
 }
