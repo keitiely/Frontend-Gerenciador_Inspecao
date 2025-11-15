@@ -85,6 +85,12 @@ struct QuadraDetalheView: View {
 
 #Preview {
     NavigationView {
-        QuadraDetalheView(quadra: Quadra(numero: 1, numeroInspecoes: 20, isPendente: true))
-    }
+           // Corrigido para usar o NOVO "molde" de Quadra
+           QuadraDetalheView(quadra: Quadra(
+               id: "q-mock-1",
+               nome: "Quadra 01",
+               status: .pendente,
+               agenteNome: "Joao Mock", numeroInspecoes: 5
+           ))
+       }
 }
