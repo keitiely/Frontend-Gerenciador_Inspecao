@@ -13,7 +13,7 @@ class AuthManager: ObservableObject {
     
     // O app inteiro vai olhar para essas duas variáveis
     @Published var isLoggedIn: Bool = false
-    @Published var userRole: String? = nil
+    @Published var userRole: String? = "Coordenador"
     
     // Use seu APIService aqui
     func login(email: String, pass: String) async -> Bool {
@@ -23,7 +23,7 @@ class AuthManager: ObservableObject {
         
         // Se der sucesso:
         self.isLoggedIn = true
-        self.userRole = "coordenador" // Pegue isso da resposta da API
+        self.userRole = "coordenador" // Pegar isso da resposta da API
         return true
         
         // Se der falha:

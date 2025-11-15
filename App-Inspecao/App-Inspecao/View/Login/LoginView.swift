@@ -9,21 +9,25 @@ import Foundation
 import SwiftUI
 
 struct LoginView: View {
-    // escuta o authmanager
+
     @EnvironmentObject var authManager: AuthManager
-    @State private var email = ""
+    @State private var user = ""
     @State private var senha = ""
     
     
     var body: some View {
-        VStack (){
-            // Header
+        VStack {
+ 
+//            Spacer()
             Text("FazAgente")
                 .font(.largeTitle)
                 .fontWeight(.heavy)
                 .foregroundStyle(Color.blue)
-                .padding(20)
-
+                .padding(.top, 70)
+                .padding(60)
+            
+                
+        
             // Caixa de login
             VStack {
                 Text("Login")
@@ -32,7 +36,7 @@ struct LoginView: View {
                     .padding()
 
                 // campo email
-                TextField("Email", text: $email)
+                TextField("Usuário", text: $user)
                     .padding(12)
                     .background(Color(UIColor.systemGray5))
                     .cornerRadius(8)
@@ -48,7 +52,7 @@ struct LoginView: View {
                 // Botão Entrar
                 Button(action: {
                     Task {
-                        await authManager.login(email: email, pass: senha)
+                        await authManager.login(email: user, pass: senha)
                     }
                 }) {
                     Text("Entrar")
@@ -60,8 +64,7 @@ struct LoginView: View {
                         .cornerRadius(8)
                 }
             }
-            .
-            padding(30)
+            .padding(30)
             .background(Color(UIColor.systemGray6))
             .cornerRadius(16)
             .padding(.horizontal)
