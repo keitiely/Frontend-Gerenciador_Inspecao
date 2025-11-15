@@ -38,7 +38,7 @@ struct InspecaoCard: View {
     InspecaoCard(
         inspecao: Inspecao(
             nome: "Inspeção 1",
-            endereco: "Endereço: Quadra 29, Conjunto C, Casa 29"
+            endereco: "Endereço: Quadra 29, Conjunto C, Casa 29", statusVisita: .concluida
         )
     )
     .padding()

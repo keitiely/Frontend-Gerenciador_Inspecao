@@ -11,5 +11,12 @@ struct Inspecao: Identifiable {
     let id = UUID()
     let nome: String
     let endereco: String
+    let statusVisita: StatusVisita
     // Outros campos que o banco de dados retornar...
+}
+
+enum StatusVisita: String {
+    case pendente = "PENDENTE" // Exemplo, verifique o valor real
+    case concluida = "CONCLUIDA" // Exemplo
+
 }
