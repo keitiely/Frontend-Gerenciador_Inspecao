@@ -40,7 +40,7 @@ struct HomeAgenteView: View {
                     ScrollView {
                         VStack(spacing: 12) {
                             ForEach(viewModel.quadras) { quadra in
-                                NavigationLink(destination: Text("Tela de Detalhes da \(quadra.nomeFormatado)")) {
+                                NavigationLink(destination: QuadraDetalheView(quadra: quadra)) {
                                     QuadraCardView(quadra: quadra)
                                 }
                                 .buttonStyle(.plain)

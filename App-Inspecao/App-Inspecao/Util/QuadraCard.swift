@@ -26,9 +26,7 @@ struct QuadraCardView: View {
             Text("Numero de Inspeções: \(quadra.numeroInspecoes)")
                 .font(.subheadline)
                 .foregroundColor(.black)
-            
-            Spacer()
-            
+        
             HStack {
                 Spacer()
                 
@@ -40,7 +38,7 @@ struct QuadraCardView: View {
             }
         }
         .padding()
-        .frame(maxWidth: .infinity, minHeight: 100, alignment: .leading)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .background(corDeFundo)
         .cornerRadius(10)
     }
