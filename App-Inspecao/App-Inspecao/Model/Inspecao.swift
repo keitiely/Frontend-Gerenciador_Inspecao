@@ -6,17 +6,28 @@
 //
 
 import Foundation
+struct Inspecao: Codable, Identifiable {
 
-struct Inspecao: Identifiable {
-    let id = UUID()
+    let id: String
     let nome: String
+    let quadraNome: String
     let endereco: String
+    let horario: String
+    let data: String
+    let relatorioTexto: String
     let statusVisita: StatusVisita
-    // Outros campos que o banco de dados retornar...
-}
-
-enum StatusVisita: String {
-    case pendente = "PENDENTE" // Exemplo, verifique o valor real
-    case concluida = "CONCLUIDA" // Exemplo
-
+//    let imagensURL: [String]?
+    
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case nome
+        case quadraNome = "quadra_nome"
+        case endereco
+        case horario
+        case data
+        case relatorioTexto = "relatorio_texto"
+        case statusVisita = "status_visita" // Ex: API manda "status_visita"
+//        case imagensURL = "imagens_url"
+    }
 }

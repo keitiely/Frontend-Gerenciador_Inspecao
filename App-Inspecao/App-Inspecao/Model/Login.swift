@@ -19,4 +19,12 @@ struct LoginRequest: Codable {
 struct LoginResponse: Codable {
     let token: String
     let user: User
+    
+    
+    //  O CodingKeys para segurança
+    enum CodingKeys: String, CodingKey {
+        case token
+        case user
+    }
 }
+

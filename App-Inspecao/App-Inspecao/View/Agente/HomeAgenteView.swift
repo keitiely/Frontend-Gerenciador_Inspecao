@@ -20,7 +20,7 @@ struct HomeAgenteView: View {
                     .fontWeight(.bold)
                     .padding(.horizontal)
                 
-               // cabeçalho lista
+                // cabeçalho lista
                 HStack {
                     Text("Quadras Atribuídas")
                         .font(.headline)
@@ -31,7 +31,7 @@ struct HomeAgenteView: View {
                 }
                 .padding(.horizontal)
                 
-               
+                
                 //lista de quadras
                 if viewModel.isLoading {
                     ProgressView() // Mostra um "loading"
@@ -40,22 +40,27 @@ struct HomeAgenteView: View {
                     ScrollView {
                         VStack(spacing: 12) {
                             ForEach(viewModel.quadras) { quadra in
-                                NavigationLink(destination: QuadraDetalheView(quadra: quadra)) {
+                                NavigationLink(destination: QuadraDetalheView(quadra: quadra, onSucesso:{ Task {
+                                    await viewModel.carregarDados(authManager: authManager)
+                                }
+                                }
+                                                                             )
+                                ){
                                     QuadraCardView(quadra: quadra)
                                 }
-                                .buttonStyle(.plain)
                             }
                         }
-                        .padding(.horizontal)
                     }
                 }
+                    
             }
             .padding(.top)
+            
             .navigationTitle("") // Oculta o título padrão da barra
             .navigationBarHidden(true) // Esconde a barra inteira
             
-            .onAppear { //assim que a tela aparecer manda pra viewmodel carregar os dados passando o authmanager
-                viewModel.carregarDados(authManager: authManager)
+            .task {
+                await viewModel.carregarDados(authManager: authManager)
             }
         }
     }
