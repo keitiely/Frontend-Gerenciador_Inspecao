@@ -27,34 +27,31 @@ struct QuadrasCoordenadorView: View {
                 if viewModel.isLoading {
                     ProgressView()
                 } else {
-                    // --- 1. SECÇÃO NÃO ATRIBUÍDAS ---
+                    // quadra não atribuidas
                     SecaoQuadrasView(
                         titulo: "Quadras não atribuidas",
                         cor: .red,
                         quadras: viewModel.quadrasNaoAtribuidas,
-                         //Destino: A tela para ATRIBUIR
                         destino: { quadra in
                             AnyView(AtribuirAgenteView(quadra: quadra))
                         }
                     )
                     
-                    // --- 2. SECÇÃO PENDENTES ---
+                    // quadra Pendentes
                     SecaoQuadrasView(
                         titulo: "Quadras pendentes",
                         cor: .yellow,
                         quadras: viewModel.quadrasPendentes,
-                        // Destino: A tela de RELATÓRIOS
                         destino: { quadra in
                             AnyView(RelatoriosListView(quadra: quadra))
                         }
                     )
                     
-                    // --- 3. SECÇÃO CONCLUÍDAS ---
+                    // Quadra Concluídas
                     SecaoQuadrasView(
                         titulo: "Quadras Concluidas",
                         cor: .blue,
                         quadras: viewModel.quadrasConcluidas,
-                      //   Destino: A tela de RELATÓRIOS
                         destino: { quadra in
                             AnyView(RelatoriosListView(quadra: quadra))
                         }
@@ -63,8 +60,6 @@ struct QuadrasCoordenadorView: View {
             }
             .padding(20)
         }
-//        .navigationTitle("")
-//        .navigationBarBackButtonHidden(true)
         .onAppear {
            
             viewModel.carregarDados(authManager: authManager)
