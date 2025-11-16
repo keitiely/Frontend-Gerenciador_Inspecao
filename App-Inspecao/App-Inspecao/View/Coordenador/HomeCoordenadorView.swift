@@ -28,7 +28,7 @@ struct HomeCoordenadorView: View {
                 // --- Botões ---
                 HStack(spacing: 20) {
                     NavigationLink(destination:
-                        AgentesCoordendadorView()) {
+                        AgentesCoordenadorView()) {
                         BotaoMenu(titulo: "Agentes")
                     }
                     

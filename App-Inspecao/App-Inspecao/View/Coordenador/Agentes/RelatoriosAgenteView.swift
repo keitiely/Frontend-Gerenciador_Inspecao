@@ -1,22 +1,29 @@
 //
-//  RelatoriosListView.swift
+//  RelatoriosAgenteView.swift
 //  App-Inspecao
 //
-//  Created by Keitiely Silva Viana on 15/11/25.
+//  Created by Keitiely Silva Viana on 16/11/25.
+//
+//
+//  RelatoriosAgenteView.swift
+//  App-Inspecao
+//
+//  Created by Keitiely Silva Viana on 16/11/25.
+//
 
 import SwiftUI
 
-struct RelatoriosListView: View {
+struct RelatoriosAgenteView: View {
     
-    @StateObject private var viewModel: RelatoriosListViewModel
+    @StateObject private var viewModel: RelatoriosAgenteViewModel
     
-    init(quadra: Quadra) {
-        _viewModel = StateObject(wrappedValue: RelatoriosListViewModel(quadra: quadra))
+    init(agente: User) {
+        _viewModel = StateObject(wrappedValue: RelatoriosAgenteViewModel(agente: agente))
     }
     
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Relatórios feitos - \(viewModel.quadra.nome)")
+            Text("Relatórios feitos - \(viewModel.agente.nome)")
                 .font(.title)
                 .fontWeight(.bold)
                 .padding([.horizontal, .top])
@@ -28,14 +35,13 @@ struct RelatoriosListView: View {
                 // Lista de Relatórios
                 List(viewModel.inspecoes) { inspecao in
                     
-                    // Cada linha é um link para a Tela 2
+                    // CADA LINHA LEVA PARA A TELA 4 (JÁ EXISTENTE)
                     NavigationLink(destination: InspecaoDetalheView(inspecao: inspecao)) {
                         
-
                         VStack(alignment: .leading, spacing: 4) {
                             Text(inspecao.nome)
                                 .font(.headline)
-                            Text(inspecao.quadraNome)
+                            Text(inspecao.quadraNome) // Mostra a quadra
                                 .font(.subheadline)
                                 .foregroundColor(.gray)
                         }
@@ -44,25 +50,17 @@ struct RelatoriosListView: View {
                 }
                 .listStyle(.plain)
             }
-        
         }
         .navigationTitle("Relatórios")
         .navigationBarTitleDisplayMode(.inline)
         .task {
-            // Carrega os dados quando a tela aparece
             await viewModel.carregarRelatorios()
         }
     }
 }
 
-// Preview
 #Preview {
     NavigationView {
-        RelatoriosListView(quadra: Quadra(
-            id: "q-mock",
-            nome: "Quadra 1",
-            status: .pendente,
-            agenteNome: "Marcos", numeroInspecoes: 2
-        ))
+        RelatoriosAgenteView(agente: User(id: "1", nome: "Marcos", role: "agente"))
     }
 }
