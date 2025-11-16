@@ -11,28 +11,51 @@ import Combine
 @MainActor
 class AuthManager: ObservableObject {
     
-    // O app inteiro vai olhar para essas duas variáveis
-    @Published var isLoggedIn: Bool = false
-    @Published var userRole: String? = "Coordenador"
+    @Published private(set) var currentUser: User? = nil
     
-    // Use seu APIService aqui
+    var isLoggedIn: Bool {
+        currentUser != nil
+    }
+    
+    var userRole: String? {
+        currentUser?.role
+    }
+    
+    
+    //    Para TESTAR, inicializamos o AuthManager com um
+    //    utilizador 'mock' (falso).
+    init() {
+        // --- CONTROLO DE TESTE ---
+        // Para testar a HomeCoordenadorView:
+        self.currentUser = User(id: "1", nome: "Keitiely", role: "coordenador")
+        // Para testar a LoginView (VERSÃO FINAL):
+//         self.currentUser = nil
+        // --- FIM DO CONTROLO DE TESTE ---
+    }
+    
+    // Api Service conecta aqui
     func login(email: String, pass: String) async -> Bool {
-        // ...
-        // Chame seu APIService.shared.login(...)
-        // ...
         
-        // Se der sucesso:
-        self.isLoggedIn = true
-        self.userRole = "coordenador" // Pegar isso da resposta da API
-        return true
+        let loginRequest = LoginRequest(email: email, password: pass)
         
-        // Se der falha:
-        // self.isLoggedIn = false
-        // return false
+        do {
+            let loginResponse = try await APIService.shared.login(request: loginRequest)
+            
+            // SUCESSO!
+            // Esta é a ÚNICA linha que muda o estado
+            self.currentUser = loginResponse.user
+            return true
+            
+        } catch {
+            // FALHA
+            self.currentUser = nil
+            print("Erro no login: \(error)")
+            return false
+        }
     }
     
     func logout() {
-        self.isLoggedIn = false
-        self.userRole = nil
+        self.currentUser = nil
     }
 }
+

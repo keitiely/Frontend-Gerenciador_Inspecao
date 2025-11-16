@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct App_InspecaoApp: App {
+    
+    @StateObject private var authManager = AuthManager()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(authManager)
         }
     }
 }
