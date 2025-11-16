@@ -35,10 +35,10 @@ class AtribuirAgenteViewModel: ObservableObject {
             try await Task.sleep(nanoseconds: 1 * 1_000_000_000)
             
             self.agentesDisponiveis = [
-                User(id: "agente_1", nome: "Marcos", role: "agente"),
-                User(id: "agente_2", nome: "Ronaldo", role: "agente"),
-                User(id: "agente_3", nome: "Nubia", role: "agente"),
-                User(id: "agente_4", nome: "Eustaquio", role: "agente")
+                User(id: "agente_1", nome: "Marcos", role: "agente", codigoAgente: nil, nomeCompleto: nil, statusAgente: nil),
+                User(id: "agente_2", nome: "Ronaldo", role: "agente", codigoAgente: nil, nomeCompleto: nil, statusAgente: nil),
+                User(id: "agente_3", nome: "Nubia", role: "agente", codigoAgente: nil, nomeCompleto: nil, statusAgente: nil),
+                User(id: "agente_4", nome: "Eustaquio", role: "agente", codigoAgente: nil, nomeCompleto: nil, statusAgente: nil)
             ]
             // --- FIM DO MOCK ---
             

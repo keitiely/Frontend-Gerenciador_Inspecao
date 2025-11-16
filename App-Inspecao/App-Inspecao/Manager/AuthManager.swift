@@ -27,9 +27,16 @@ class AuthManager: ObservableObject {
     init() {
         // --- CONTROLO DE TESTE ---
         // Para testar a HomeCoordenadorView:
-        self.currentUser = User(id: "1", nome: "Keitiely", role: "coordenador")
+        self.currentUser = User(
+            id: "1",
+            nome: "Keitiely",
+            role: "coordenador",
+            codigoAgente: nil,  // Adicione nil
+            nomeCompleto: nil, // Adicione nil
+            statusAgente: nil   // Adicione nil
+        )
         // Para testar a LoginView (VERSÃO FINAL):
-//         self.currentUser = nil
+        //         self.currentUser = nil
         // --- FIM DO CONTROLO DE TESTE ---
     }
     

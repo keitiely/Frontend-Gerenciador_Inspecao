@@ -58,9 +58,9 @@ struct RelatoriosAgenteView: View {
         }
     }
 }
-
-#Preview {
-    NavigationView {
-        RelatoriosAgenteView(agente: User(id: "1", nome: "Marcos", role: "agente"))
-    }
-}
+//
+//#Preview {
+//    NavigationView {
+//        RelatoriosAgenteView(agente: User(id: "1", nome: "Marcos", role: "agente"))
+//    }
+//}

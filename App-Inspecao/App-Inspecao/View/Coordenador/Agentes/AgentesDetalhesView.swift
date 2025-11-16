@@ -9,38 +9,48 @@ import SwiftUI
 
 struct AgenteDetalheView: View {
     
-    let agente: User
+    @StateObject private var viewModel: AgenteDetalheViewModel
     
-    // Mocks para os campos da UI
-    let codigoAgente: String = "A01234"
-    let nomeCompleto: String = "Marcos Antonio Xavier"
-    let statusAgente: String = "Ativo"
+    init(agente: User) {
+        _viewModel = StateObject(wrappedValue: AgenteDetalheViewModel(agente: agente))
+    }
     
     var body: some View {
         VStack(alignment: .leading, spacing: 20) {
-            Text(agente.nome) // "Marcos"
+            
+            Text(viewModel.agente.nome)
                 .font(.title)
                 .fontWeight(.bold)
             
-            Text("Informações do Marcos") // TODO: Usar nome dinâmico
+        
+            Text("Informações do \(viewModel.agente.nome)")
                 .font(.subheadline)
                 .foregroundColor(.gray)
             
-            // --- Card de Informações ---
-            VStack(alignment: .leading, spacing: 15) {
-                CampoInfoAgente(titulo: "Código:", valor: codigoAgente)
-                CampoInfoAgente(titulo: "Nome:", valor: nomeCompleto)
-                CampoInfoAgente(titulo: "Status:", valor: statusAgente)
+            //  Mostra um loading enquanto os dados carregam
+            if viewModel.isLoading {
+                ProgressView()
+                    .frame(maxWidth: .infinity)
+                    .padding()
+            } else {
+                // --- Card de Informações ---
+                VStack(alignment: .leading, spacing: 15) {
+                    
+                   
+                    CampoInfoAgente(titulo: "Código:", valor: viewModel.codigoAgente)
+                    CampoInfoAgente(titulo: "Nome:", valor: viewModel.nomeCompleto)
+                    CampoInfoAgente(titulo: "Status:", valor: viewModel.statusAgente)
+                }
+                .padding()
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color(UIColor.systemGray6))
+                .cornerRadius(10)
             }
-            .padding()
-            .frame(maxWidth: .infinity, alignment: .leading)
-            .background(Color(UIColor.systemGray6))
-            .cornerRadius(10)
             
             Spacer()
             
-            // --- Botão de Navegação ---
-            NavigationLink(destination: RelatoriosAgenteView(agente: agente)) {
+            
+            NavigationLink(destination: RelatoriosAgenteView(agente: viewModel.agente)) {
                 Text("Relatórios")
                     .font(.headline)
                     .foregroundColor(.black)
@@ -52,8 +62,11 @@ struct AgenteDetalheView: View {
             
         }
         .padding()
-        .navigationTitle(agente.nome)
+        .navigationTitle(viewModel.agente.nome)
         .navigationBarTitleDisplayMode(.inline)
+        .task {
+            await viewModel.carregarDetalhes()
+        }
     }
 }
 
@@ -74,8 +87,8 @@ struct CampoInfoAgente: View {
     }
 }
 
-#Preview {
-    NavigationView {
-        AgenteDetalheView(agente: User(id: "1", nome: "Marcos", role: "agente"))
-    }
-}
+//#Preview {
+//    NavigationView {
+//        AgenteDetalheView(agente: User(codigoAgente: "agente_01", nomeCompleto: "Marcos", role: "agente"))
+//    }
+//}

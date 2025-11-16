@@ -20,7 +20,7 @@ struct HomeAgenteView: View {
                     .fontWeight(.bold)
                     .padding(.horizontal)
                 
-               // cabeçalho lista
+                // cabeçalho lista
                 HStack {
                     Text("Quadras Atribuídas")
                         .font(.headline)
@@ -31,7 +31,7 @@ struct HomeAgenteView: View {
                 }
                 .padding(.horizontal)
                 
-               
+                
                 //lista de quadras
                 if viewModel.isLoading {
                     ProgressView() // Mostra um "loading"
@@ -43,10 +43,8 @@ struct HomeAgenteView: View {
                                 NavigationLink(destination: QuadraDetalheView(quadra: quadra)) {
                                     QuadraCardView(quadra: quadra)
                                 }
-                                .buttonStyle(.plain)
                             }
                         }
-                        .padding(.horizontal)
                     }
                 }
             }

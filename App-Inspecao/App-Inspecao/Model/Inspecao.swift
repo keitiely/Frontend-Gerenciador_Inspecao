@@ -16,7 +16,7 @@ struct Inspecao: Codable, Identifiable {
     let data: String
     let relatorioTexto: String
     let statusVisita: StatusVisita
-//    let imagensURL: [String]? //adicionar depois
+//    let imagensURL: [String]?
     
     
     enum CodingKeys: String, CodingKey {
@@ -29,16 +29,5 @@ struct Inspecao: Codable, Identifiable {
         case relatorioTexto = "relatorio_texto"
         case statusVisita = "status_visita" // Ex: API manda "status_visita"
 //        case imagensURL = "imagens_url"
-    }
-}
-enum StatusVisita: String, Codable, CaseIterable {
-    case pendente = "PENDENTE"
-    case concluida = "CONCLUIDA"
-    case unknown = "UNKNOWN"
-    
-    // se a API mandar um status que você não espera.
-    // Ele simplesmente vai tratar como .unknown
-    public init(from decoder: Decoder) throws {
-        self = try StatusVisita(rawValue: decoder.singleValueContainer().decode(String.self)) ?? .unknown
     }
 }
