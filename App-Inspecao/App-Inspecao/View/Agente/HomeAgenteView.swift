@@ -50,6 +50,7 @@ struct HomeAgenteView: View {
                                 }
                             }
                         }
+                        .padding(.horizontal)
                     }
                 }
                     
