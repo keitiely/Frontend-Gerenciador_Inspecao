@@ -28,15 +28,15 @@ class QuadrasCoordenadorViewModel: ObservableObject {
         
         // --- PONTO DE CONEXÃO COM O BACK-END ---
         //
-        // 3. No futuro, você vai chamar a API (com o token)
+        //  chamar a API (com o token)
         // let token = authManager.token // (Precisamos de adicionar o token ao AuthManager)
         // let todasQuadras = try await APIService.shared.getTodasAsQuadras(token: token)
         //
         // --- FIM DA CONEXÃO ---
         
         
-        // --- DADOS MOCK (FALSOS) por agora ---
-        // (A usar o seu Model/Quadra.swift PERFEITO)
+        // --- DADOS MOCK (FALSOS) por enqunato ---
+        // (A usar o seu Model/Quadra.swift )
         let todasQuadras: [Quadra] = [
             // Não Atribuídas
             Quadra(id: "q1", nome: "Quadra 01", status: .naoAtribuida, agenteNome: nil, numeroInspecoes: 0),

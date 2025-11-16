@@ -16,6 +16,6 @@ public struct RelatoriosListView: View {
 //    }
 
     public var body: some View {
-        Text("Atribuir Agente View for Quadra \(quadra.id)")
+        Text("Relatorios das quadras \(quadra.id)")
     }
 }

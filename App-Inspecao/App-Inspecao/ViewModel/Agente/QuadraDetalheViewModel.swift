@@ -26,7 +26,7 @@ class QuadraDetalheViewModel: ObservableObject {
         
         // --- PONTO DE CONEXÃO COM O BACK-END ---
         //
-        // Aqui, você chamará sua APIService passando o ID da quadra:
+        // Aqui, chamar sua APIService passando o ID da quadra:
         // ex: APIService.shared.buscarInspecoes(quadraID: quadra.id) { (inspecoes) in
         //     self.inspecoes = inspecoes
         //     self.isLoading = false
