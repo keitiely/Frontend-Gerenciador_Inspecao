@@ -40,15 +40,22 @@ struct HomeAgenteView: View {
                     ScrollView {
                         VStack(spacing: 12) {
                             ForEach(viewModel.quadras) { quadra in
-                                NavigationLink(destination: QuadraDetalheView(quadra: quadra)) {
+                                NavigationLink(destination: QuadraDetalheView(quadra: quadra, onSucesso:{ Task {
+                                    await viewModel.carregarDados(authManager: authManager)
+                                }
+                                }
+                                                                             )
+                                ){
                                     QuadraCardView(quadra: quadra)
                                 }
                             }
                         }
                     }
                 }
+                    
             }
             .padding(.top)
+            
             .navigationTitle("") // Oculta o título padrão da barra
             .navigationBarHidden(true) // Esconde a barra inteira
             

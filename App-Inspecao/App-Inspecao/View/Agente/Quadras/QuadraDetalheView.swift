@@ -11,24 +11,34 @@ struct QuadraDetalheView: View {
     @StateObject private var viewModel: QuadraDetalheViewModel
     @Environment(\.presentationMode) var presentationMode
     
-    init(quadra: Quadra) {
+    var onSucesso: () -> Void
+    
+    init(quadra: Quadra, onSucesso: @escaping () -> Void) {
         _viewModel = StateObject(wrappedValue: QuadraDetalheViewModel(quadra: quadra))
+        self.onSucesso = onSucesso
     }
     
     var body: some View {
         VStack(spacing: 0) {
             
-            // Agora usa o componente reutilizável
+            // Componente reutilavel
             QuadraCardView(quadra: viewModel.quadra)
                 .padding(.horizontal)
             
-            // --- 2. Cabeçalho da Lista "Inspeções" ---
+            // Cabeçalho da Lista "Inspeções"
             HStack {
                 Text("Inspeções")
                     .font(.headline)
                 Spacer()
                 
-                NavigationLink(destination: Text("Tela Futura: Adicionar Inspeção")) {
+                NavigationLink(destination:
+                AddInspecaoView( quadra: viewModel.quadra, onRegistroSucesso: {
+                      Task {
+                         await viewModel.carregarInspecoes()
+                        }
+                    }
+                )
+                ) {
                     Image(systemName: "plus")
                         .font(.headline)
                         .padding(8)
@@ -38,7 +48,7 @@ struct QuadraDetalheView: View {
             }
             .padding()
             
-            // --- 3. Lista de Inspeções ---
+            // Lista de Inspeções
             if viewModel.isLoading {
                 ProgressView()
                 Spacer()
@@ -55,8 +65,16 @@ struct QuadraDetalheView: View {
                 }
             }
             
-            // ---  Botão de Resumo (Footer) ---
-            NavigationLink(destination: Text("Tela Futura: Resumo da Quadra")) {
+            // Botao Tela resumo
+            NavigationLink(destination:
+                            ResumoQuadraView(
+                                quadra: viewModel.quadra,
+                                onFinalizacaoSucesso: {
+                                    self.onSucesso()
+                                    presentationMode.wrappedValue.dismiss()
+                                }
+                            )
+            ) {
                 Text("Resumo da Quadra")
                     .font(.headline)
                     .foregroundColor(.black)
@@ -94,6 +112,10 @@ struct QuadraDetalheView: View {
                nome: "Quadra 01",
                status: .pendente,
                agenteNome: "Joao Mock", numeroInspecoes: 5
-           ))
+           ), onSucesso: {
+               // O Preview não faz nada no sucesso
+               print("Callback de sucesso chamado no Preview")
+           }
+           )
        }
 }

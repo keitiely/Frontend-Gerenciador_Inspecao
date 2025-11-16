@@ -30,7 +30,7 @@ class AuthManager: ObservableObject {
         self.currentUser = User(
             id: "1",
             nome: "Keitiely",
-            role: "coordenador",
+            role: "agente",
             codigoAgente: nil,  // Adicione nil
             nomeCompleto: nil, // Adicione nil
             statusAgente: nil   // Adicione nil
