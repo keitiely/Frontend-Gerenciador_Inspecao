@@ -33,10 +33,15 @@ struct QuadrasCoordenadorView: View {
                         cor: .red,
                         quadras: viewModel.quadrasNaoAtribuidas,
                         destino: { quadra in
-                            AnyView(AtribuirAgenteView(quadra: quadra))
+                            AnyView(AtribuirAgenteView(quadra: quadra,
+                                                       onAtribuicaoSucesso:{
+                                Task {
+                                    await viewModel.carregarQuadras()
+                                }
+                            }
+                            ))
                         }
-                    )
-                    
+                )
                     // quadra Pendentes
                     SecaoQuadrasView(
                         titulo: "Quadras pendentes",
@@ -61,13 +66,12 @@ struct QuadrasCoordenadorView: View {
             .padding(20)
         }
         .onAppear {
-           
-            viewModel.carregarDados(authManager: authManager)
+            Task {
+                await viewModel.carregarQuadras()
+            }
         }
     }
 }
-
-
 
 // Componente para a Secção (Vermelha, Amarela, Azul)
 struct SecaoQuadrasView<Destino: View>: View {
@@ -136,3 +140,4 @@ struct CardQuadraCoordenador: View {
             .environmentObject(AuthManager())
     }
 }
+

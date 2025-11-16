@@ -68,7 +68,10 @@ struct QuadraDetalheView: View {
             .padding()
             
         }
-        .navigationTitle("")
+        .task {
+            await viewModel.carregarInspecoes()
+        }
+        .navigationTitle(viewModel.quadra.nome)
         .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading:
             Button(action: {

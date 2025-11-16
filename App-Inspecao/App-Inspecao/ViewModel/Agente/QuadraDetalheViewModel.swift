@@ -18,33 +18,54 @@ class QuadraDetalheViewModel: ObservableObject {
     
     init(quadra: Quadra) {
         self.quadra = quadra
-        carregarInspecoes() 
     }
     
-    func carregarInspecoes() {
-        self.isLoading = true
-        
-        // --- PONTO DE CONEXÃO COM O BACK-END ---
-        //
-        // Aqui, chamar sua APIService passando o ID da quadra:
-        // ex: APIService.shared.buscarInspecoes(quadraID: quadra.id) { (inspecoes) in
-        //     self.inspecoes = inspecoes
-        //     self.isLoading = false
-        // }
-        //
-        // --- FIM DA CONEXÃO COM O BACK-END ---
-        
-        // Por enquanto, usamos "Dados de Mock" (teste)
-        // Simulando uma busca que demora 1 segundo.
+    func carregarInspecoes() async {
+            self.isLoading = true
+            defer { self.isLoading = false }
             
-            // Simula a lista de inspeções vinda do banco para esta quadra
-            self.inspecoes = [
-                Inspecao(nome: "Inspeção 1", endereco: "Endereço: Quadra 29, Conjunto C, Casa 29", statusVisita: .concluida),
-                Inspecao(nome: "Inspeção 2", endereco: "Endereço: Quadra 29, Conjunto C, Casa 30", statusVisita: .concluida),
-                Inspecao(nome: "Inspeção 3", endereco: "Endereço: Quadra 29, Conjunto D, Casa 01", statusVisita: .concluida)
-            ]
-            
-            self.isLoading = false
-        
+            do {
+                // --- PONTO DE CONEXÃO COM O BACK-END ---
+                // self.inspecoes = try await APIService.shared.buscarInspecoes(quadraID: quadra.id)
+                
+                // --- INÍCIO DO MOCK  TESTE---
+                try await Task.sleep(nanoseconds: 1 * 1_000_000_000)
+                self.inspecoes = [
+                    Inspecao(
+                        id: "..",
+                        nome: "Inspeção 1",
+                        quadraNome: quadra.nome,
+                        endereco: "Endereço: Quadra 29, Conjunto C, Casa 29",
+                        horario: "09:00",
+                        data: "08/09/23",
+                        relatorioTexto: "Relatório de teste 1",
+                        statusVisita: .concluida
+                    ),
+                    Inspecao(
+                        id: "..",
+                        nome: "Inspeção 2",
+                        quadraNome: quadra.nome,
+                        endereco: "Endereço: Quadra 29, Conjunto C, Casa 30",
+                        horario: "10:30",
+                        data: "08/09/23",
+                        relatorioTexto: "Relatório de teste 2",
+                        statusVisita: .concluida
+                    ),
+                    Inspecao(
+                        id: "...",
+                        nome: "Inspeção 3",
+                        quadraNome: quadra.nome,
+                        endereco: "Endereço: Quadra 29, Conjunto D, Casa 01",
+                        horario: "14:15",
+                        data: "08/09/23",
+                        relatorioTexto: "Relatório de teste 3",
+                        statusVisita: .concluida
+                    )
+                ]
+                // --- FIM DO MOCK ---
+                
+            } catch {
+                print("Erro ao carregar inspeções: \(error)")
+            }
+        }
     }
-}

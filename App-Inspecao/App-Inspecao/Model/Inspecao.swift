@@ -6,17 +6,39 @@
 //
 
 import Foundation
+struct Inspecao: Codable, Identifiable {
 
-struct Inspecao: Identifiable {
-    let id = UUID()
+    let id: String
     let nome: String
+    let quadraNome: String
     let endereco: String
+    let horario: String
+    let data: String
+    let relatorioTexto: String
     let statusVisita: StatusVisita
-    // Outros campos que o banco de dados retornar...
+//    let imagensURL: [String]? //adicionar depois
+    
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case nome
+        case quadraNome = "quadra_nome"
+        case endereco
+        case horario
+        case data
+        case relatorioTexto = "relatorio_texto"
+        case statusVisita = "status_visita" // Ex: API manda "status_visita"
+//        case imagensURL = "imagens_url"
+    }
 }
-
-enum StatusVisita: String {
-    case pendente = "PENDENTE" // Exemplo, verifique o valor real
-    case concluida = "CONCLUIDA" // Exemplo
-
+enum StatusVisita: String, Codable, CaseIterable {
+    case pendente = "PENDENTE"
+    case concluida = "CONCLUIDA"
+    case unknown = "UNKNOWN"
+    
+    // se a API mandar um status que você não espera.
+    // Ele simplesmente vai tratar como .unknown
+    public init(from decoder: Decoder) throws {
+        self = try StatusVisita(rawValue: decoder.singleValueContainer().decode(String.self)) ?? .unknown
+    }
 }

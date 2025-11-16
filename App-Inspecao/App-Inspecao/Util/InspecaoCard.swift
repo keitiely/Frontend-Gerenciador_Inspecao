@@ -33,13 +33,13 @@ struct InspecaoCard: View {
     }
 }
 
-
-#Preview {
-    InspecaoCard(
-        inspecao: Inspecao(
-            nome: "Inspeção 1",
-            endereco: "Endereço: Quadra 29, Conjunto C, Casa 29", statusVisita: .concluida
-        )
-    )
-    .padding()
-}
+//
+//#Preview {
+//    InspecaoCard(
+//        inspecao: Inspecao(
+//            nome: "Inspeção 1",
+//            endereco: "Endereço: Quadra 29, Conjunto C, Casa 29", statusVisita: .concluida
+//        )
+//    )
+//    .padding()
+//}

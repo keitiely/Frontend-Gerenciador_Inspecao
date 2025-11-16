@@ -54,8 +54,8 @@ struct HomeAgenteView: View {
             .navigationTitle("") // Oculta o título padrão da barra
             .navigationBarHidden(true) // Esconde a barra inteira
             
-            .onAppear { //assim que a tela aparecer manda pra viewmodel carregar os dados passando o authmanager
-                viewModel.carregarDados(authManager: authManager)
+            .task {
+                await viewModel.carregarDados(authManager: authManager)
             }
         }
     }
