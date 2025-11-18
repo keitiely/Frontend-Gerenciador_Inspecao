@@ -17,13 +17,11 @@ struct LoginRequest: Codable {
 // o que o back devolve
 // verificar se corresponde ao json que o back envia
 struct LoginResponse: Codable {
-    let token: String
     let user: User
     
     
     //  O CodingKeys para segurança
     enum CodingKeys: String, CodingKey {
-        case token
         case user
     }
 }

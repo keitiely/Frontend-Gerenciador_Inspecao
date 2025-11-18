@@ -16,7 +16,7 @@ struct Inspecao: Codable, Identifiable {
     let data: String
     let relatorioTexto: String
     let statusVisita: StatusVisita
-//    let imagensURL: [String]?
+    let fotos: [String]?
     
     
     enum CodingKeys: String, CodingKey {
@@ -28,6 +28,6 @@ struct Inspecao: Codable, Identifiable {
         case data
         case relatorioTexto = "relatorio_texto"
         case statusVisita = "status_visita" // Ex: API manda "status_visita"
-//        case imagensURL = "imagens_url"
+        case fotos
     }
 }

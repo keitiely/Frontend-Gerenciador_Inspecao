@@ -14,7 +14,7 @@ struct ContentView: View {
         
         if authManager.isLoggedIn {
             
-            if authManager.userRole == "agente" {
+            if authManager.userRole == "AGENTE" {
                 HomeAgenteView()
             } else {
                 HomeCoordenadorView()

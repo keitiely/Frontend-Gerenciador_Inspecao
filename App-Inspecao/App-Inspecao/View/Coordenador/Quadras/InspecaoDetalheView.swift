@@ -22,10 +22,12 @@ struct InspecaoDetalheView: View {
                 
                 // --- Seção de Detalhes ---
                 VStack(alignment: .leading, spacing: 15) {
-                    CampoDetalhe(titulo: "Endereço:", valor: inspecao.endereco)
+                    CampoDetalhe(titulo: "Endereço:", valor: inspecao.quadraNome)
                     CampoDetalhe(titulo: "Horário:", valor: inspecao.horario)
                     CampoDetalhe(titulo: "Data:", valor: inspecao.data)
+                        .padding(.trailing, 250)
                 }
+                .frame(maxWidth: .infinity)
                 .padding()
                 .background(Color(UIColor.systemGray6))
                 .cornerRadius(10)
@@ -47,17 +49,33 @@ struct InspecaoDetalheView: View {
                         .foregroundColor(.gray)
                     
                     // Placeholder para as imagens
-                    HStack(spacing: 10) {
-                        Rectangle()
-                            .fill(Color(UIColor.systemGray4))
-                            .frame(width: 100, height: 100)
-                            .cornerRadius(8)
-                        
-                        Rectangle()
-                            .fill(Color(UIColor.systemGray4))
-                            .frame(width: 100, height: 100)
-                            .cornerRadius(8)
-                    }
+                    // Seção de Imagens Decodificadas
+                        ScrollView(.horizontal, showsIndicators: false) {
+                            HStack(spacing: 10) {
+                                
+                                // 1. Faz um loop no novo array 'fotos'
+                                ForEach(inspecao.fotos ?? [], id: \.self) { base64String in
+                                    
+                                    // 2. Tenta decodificar a string
+                                    if let uiImage = imageFromBase64(base64String) {
+                                        // 3. Mostra a imagem
+                                        Image(uiImage: uiImage)
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: 100, height: 100)
+                                            .cornerRadius(8)
+                                            .clipped()
+                                    } else {
+                                        // 4. Mostra um erro se a string for inválida
+                                        Image(systemName: "photo.fill.on.rectangle.fill")
+                                            .frame(width: 100, height: 100)
+                                            .background(Color(UIColor.systemGray4))
+                                            .cornerRadius(8)
+                                    }
+                                }
+                            }
+                        }
+                                   
                 }
                 
                 Spacer()
@@ -67,6 +85,20 @@ struct InspecaoDetalheView: View {
         .navigationTitle(inspecao.nome) // "Relatório 1"
         .navigationBarTitleDisplayMode(.inline)
     }
+    
+    // --- ADICIONE ESTA FUNÇÃO ---
+        /// Converte uma string Base64 em um objeto UIImage
+        private func imageFromBase64(_ base64String: String) -> UIImage? {
+            // Algumas strings base64 podem vir com um prefixo, removemos
+            let stringLimpa = base64String.replacingOccurrences(of: "data:image/jpeg;base64,", with: "")
+            
+            guard let data = Data(base64Encoded: stringLimpa) else {
+                return nil
+            }
+            return UIImage(data: data)
+        }
+        // ----------------------------
+    
 }
 
 // --- Componente de ajuda para esta tela ---
@@ -82,6 +114,8 @@ struct CampoDetalhe: View {
             Text(valor)
                 .font(.body)
                 .fontWeight(.medium)
+            
         }
+
     }
 }

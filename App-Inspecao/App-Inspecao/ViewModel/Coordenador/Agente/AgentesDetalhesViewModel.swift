@@ -28,32 +28,21 @@ class AgenteDetalheViewModel: ObservableObject {
         self.isLoading = true
         defer { self.isLoading = false }
         
-        // A API de verdade usaria o ID:
-        // let detalhes = try await APIService.shared.buscarDetalhesAgente(id: agente.id)
-        
-        //mock de Teste
-        // Simula a espera da rede
-        try? await Task.sleep(nanoseconds: 1 * 1_000_000_000)
-        
-        // Simula dados diferentes para IDs diferentes
-        switch agente.id {
-        case "agente_1": // Marcos
-            self.codigoAgente = "A01234"
-            self.nomeCompleto = "Marcos Antonio Xavier"
-            self.statusAgente = "Ativo"
-        case "agente_2": // Ronaldo
-            self.codigoAgente = "A05678"
-            self.nomeCompleto = "Ronaldo Souza Lima"
-            self.statusAgente = "Ativo"
-        case "agente_3": // Nubia
-            self.codigoAgente = "A09987"
-            self.nomeCompleto = "Nubia Oliveira"
-            self.statusAgente = "Férias"
-        default:
-            self.codigoAgente = "Indefinido"
-            self.nomeCompleto = "Não encontrado"
-            self.statusAgente = "Inativo"
+        do {
+            // A API de verdade usaria o ID:
+            let detalhes = try await APIService.shared.buscarDetalhesAgente(id: agente.id)
+            
+            // Popula os dados com a resposta da API
+            self.codigoAgente = detalhes.codigoAgente ?? "N/A"
+            self.nomeCompleto = detalhes.nomeCompleto ?? "N/A"
+            self.statusAgente = detalhes.statusAgente ?? "Indefinido"
+        } catch {
+            // Trata o erro da API e mantém valores padrão seguros
+            self.codigoAgente = "N/A"
+            self.nomeCompleto = "N/A"
+            self.statusAgente = "Erro ao carregar"
+            // Opcional: log do erro para debug
+            print("Falha ao buscar detalhes do agente: \(error)")
         }
-        // --- FIM DO MOCK ---
     }
 }

@@ -28,18 +28,18 @@ class AtribuirAgenteViewModel: ObservableObject {
         
         do {
             //Substituir pela chamada api
-            // self.agentesDisponiveis = try await APIService.shared.fetchAvailableAgents()
+            self.agentesDisponiveis = try await APIService.shared.buscarTodosAgentes()
 
             // --- INÍCIO DO MOCK (Dados Falsos para Teste) ---
             // Simula um delay de 1 segundo da rede
-            try await Task.sleep(nanoseconds: 1 * 1_000_000_000)
-            
-            self.agentesDisponiveis = [
-                User(id: "agente_1", nome: "Marcos", role: "agente", codigoAgente: nil, nomeCompleto: nil, statusAgente: nil),
-                User(id: "agente_2", nome: "Ronaldo", role: "agente", codigoAgente: nil, nomeCompleto: nil, statusAgente: nil),
-                User(id: "agente_3", nome: "Nubia", role: "agente", codigoAgente: nil, nomeCompleto: nil, statusAgente: nil),
-                User(id: "agente_4", nome: "Eustaquio", role: "agente", codigoAgente: nil, nomeCompleto: nil, statusAgente: nil)
-            ]
+//            try await Task.sleep(nanoseconds: 1 * 1_000_000_000)
+//            
+//            self.agentesDisponiveis = [
+//                User(id: "agente_1", nome: "Marcos", role: "agente", codigoAgente: nil, nomeCompleto: nil, statusAgente: nil),
+//                User(id: "agente_2", nome: "Ronaldo", role: "agente", codigoAgente: nil, nomeCompleto: nil, statusAgente: nil),
+//                User(id: "agente_3", nome: "Nubia", role: "agente", codigoAgente: nil, nomeCompleto: nil, statusAgente: nil),
+//                User(id: "agente_4", nome: "Eustaquio", role: "agente", codigoAgente: nil, nomeCompleto: nil, statusAgente: nil)
+//            ]
             // --- FIM DO MOCK ---
             
         } catch {
@@ -55,11 +55,11 @@ class AtribuirAgenteViewModel: ObservableObject {
         
         do {
             // substituir pela chamada api
-            // try await APIService.shared.assignAgentToQuadra(quadraID: quadraID, agentID: agenteID)
+            try await APIService.shared.atribuirAgente(quadraID: quadraID, agenteID: agenteID)
             
             // --- INÍCIO DO MOCK (Simula Sucesso) ---
-            try await Task.sleep(nanoseconds: 1 * 1_000_000_000)
-            self.atribuicaoSucesso = true
+//            try await Task.sleep(nanoseconds: 1 * 1_000_000_000)
+//            self.atribuicaoSucesso = true
             // --- FIM DO MOCK ---
             
         } catch {

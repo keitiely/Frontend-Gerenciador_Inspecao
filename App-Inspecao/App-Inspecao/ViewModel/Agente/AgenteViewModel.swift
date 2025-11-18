@@ -28,16 +28,18 @@ class AgenteViewModel: ObservableObject {
         
         do {
             // --- PONTO DE CONEXÃO COM O BACK-END ---
-            // let minhasQuadras = try await APIService.shared.getMinhasQuadras(agenteID: agenteLogado.id)
+             let minhasQuadras = try await APIService.shared.getMinhasQuadras(agenteID: agenteLogado.id)
             
             // --- INÍCIO DO MOCK TESTE---
-            try await Task.sleep(nanoseconds: 1 * 1_000_000_000)
-            let todasQuadrasMock: [Quadra] = [
-                Quadra(id: "q3", nome: "Quadra 03", status: .pendente, agenteNome: agenteLogado.nome, numeroInspecoes: 8),
-                Quadra(id: "q5", nome: "Quadra 05", status: .concluida, agenteNome: agenteLogado.nome, numeroInspecoes: 9)
-            ]
-            self.quadras = todasQuadrasMock // O filtro do mock já está feito
+//            try await Task.sleep(nanoseconds: 1 * 1_000_000_000)
+//            let todasQuadrasMock: [Quadra] = [
+//                Quadra(id: "q3", nome: "Quadra 03", status: .pendente, agenteNome: agenteLogado.nome, numeroInspecoes: 8),
+//                Quadra(id: "q5", nome: "Quadra 05", status: .concluida, agenteNome: agenteLogado.nome, numeroInspecoes: 9)
+//            ]
+//            self.quadras = todasQuadrasMock // O filtro do mock já está feito
             // --- FIM DO MOCK ---
+            
+            self.quadras = minhasQuadras// O filtro do mock já está feito
             
         } catch {
             print("Erro ao carregar quadras do agente: \(error)")

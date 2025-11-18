@@ -51,7 +51,7 @@ struct ResumoQuadraView: View {
                         // Remove a legenda automática
                         .chartLegend(.hidden)
                         //texto de porcentagem no meio
-                 Text(viewModel.percentualVisitadas, format: .percent)
+                        Text(viewModel.percentualVisitadas.formatted(.percent.precision(.fractionLength(2))))
                             .font(.largeTitle)
                             .fontWeight(.bold)
                     }

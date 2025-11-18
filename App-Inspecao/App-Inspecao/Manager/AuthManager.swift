@@ -24,20 +24,25 @@ class AuthManager: ObservableObject {
     
     //    Para TESTAR, inicializamos o AuthManager com um
     //    utilizador 'mock' (falso).
+//    init() {
+//        // --- CONTROLO DE TESTE ---
+//        // Para testar a HomeCoordenadorView:
+//        self.currentUser = User(
+//            id: "1",
+//            nome: "Keitiely",
+//            role: "agente",
+//            codigoAgente: nil,  // Adicione nil
+//            nomeCompleto: nil, // Adicione nil
+//            statusAgente: nil   // Adicione nil
+//        )
+//        // Para testar a LoginView (VERSÃO FINAL):
+//        //         self.currentUser = nil
+//        // --- FIM DO CONTROLO DE TESTE ---
+//    }
+    
     init() {
-        // --- CONTROLO DE TESTE ---
-        // Para testar a HomeCoordenadorView:
-        self.currentUser = User(
-            id: "1",
-            nome: "Keitiely",
-            role: "agente",
-            codigoAgente: nil,  // Adicione nil
-            nomeCompleto: nil, // Adicione nil
-            statusAgente: nil   // Adicione nil
-        )
         // Para testar a LoginView (VERSÃO FINAL):
-        //         self.currentUser = nil
-        // --- FIM DO CONTROLO DE TESTE ---
+            self.currentUser = nil
     }
     
     // Api Service conecta aqui

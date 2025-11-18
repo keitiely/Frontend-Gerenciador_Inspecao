@@ -23,9 +23,6 @@ struct QuadraCardView: View {
                 .fontWeight(.bold)
                 .foregroundColor(.black)
             
-            Text("Numero de Inspeções: \(quadra.numeroInspecoes)")
-                .font(.subheadline)
-                .foregroundColor(.black)
         
             HStack {
                 Spacer()

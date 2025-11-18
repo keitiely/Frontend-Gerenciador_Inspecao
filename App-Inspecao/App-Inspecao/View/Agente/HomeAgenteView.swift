@@ -25,9 +25,6 @@ struct HomeAgenteView: View {
                     Text("Quadras Atribuídas")
                         .font(.headline)
                     Spacer()
-                    Text("Mes: \(viewModel.mesAtual)")
-                        .font(.subheadline)
-                        .foregroundColor(.gray)
                 }
                 .padding(.horizontal)
                 

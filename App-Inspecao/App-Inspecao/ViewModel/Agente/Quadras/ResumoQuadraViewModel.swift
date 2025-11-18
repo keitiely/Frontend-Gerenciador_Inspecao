@@ -42,14 +42,14 @@ class ResumoQuadraViewModel: ObservableObject {
         
         do {
             // --- PONTO DA API ---
-            // let resumo = try await APIService.shared.buscarResumo(quadraID: quadra.id)
-            // let visitadas = resumo.casasVisitadas
-            // let fechadas = resumo.casasFechadas
+             let resumo = try await APIService.shared.buscarResumo(quadraID: quadra.id)
+             let visitadas = resumo.visitadas
+            let fechadas = resumo.fechadas
             
             // mock teste
-            try await Task.sleep(nanoseconds: 1 * 1_000_000_000)
-            let visitadas = 75
-            let fechadas = 25
+//            try await Task.sleep(nanoseconds: 1 * 1_000_000_000)
+//            let visitadas = 75
+//            let fechadas = 25
             // fim mock
             
             let total = visitadas + fechadas
@@ -74,10 +74,10 @@ class ResumoQuadraViewModel: ObservableObject {
         
         do {
             // --- PONTO DA API ---
-            // try await APIService.shared.finalizarQuadra(quadraID: quadra.id)
+             try await APIService.shared.finalizarQuadra(quadraID: quadra.id)
             
             // mock
-            try await Task.sleep(nanoseconds: 1 * 1_000_000_000)
+//            try await Task.sleep(nanoseconds: 1 * 1_000_000_000)
             //fim mock
             
             self.finalizacaoSucesso = true

@@ -10,6 +10,7 @@ struct QuadraDetalheView: View {
     
     @StateObject private var viewModel: QuadraDetalheViewModel
     @Environment(\.presentationMode) var presentationMode
+    @EnvironmentObject var authManager: AuthManager
     
     var onSucesso: () -> Void
     
@@ -30,21 +31,24 @@ struct QuadraDetalheView: View {
                 Text("Inspeções")
                     .font(.headline)
                 Spacer()
-                
-                NavigationLink(destination:
-                AddInspecaoView( quadra: viewModel.quadra, onRegistroSucesso: {
-                      Task {
-                         await viewModel.carregarInspecoes()
-                        }
+                if viewModel.quadra.status != .concluida{
+                    NavigationLink(destination:
+                    AddInspecaoView( quadra: viewModel.quadra, onRegistroSucesso: {
+                          Task {
+                             await viewModel.carregarInspecoes()
+                            }
+                        },
+                         agenteID: authManager.currentUser?.id ?? "" // <- Passar o ID
+                     )
+                    ) {
+                        Image(systemName: "plus")
+                            .font(.headline)
+                            .padding(8)
+                            .background(Color.gray.opacity(0.2))
+                            .clipShape(Circle())
                     }
-                )
-                ) {
-                    Image(systemName: "plus")
-                        .font(.headline)
-                        .padding(8)
-                        .background(Color.gray.opacity(0.2))
-                        .clipShape(Circle())
                 }
+
             }
             .padding()
             
@@ -66,24 +70,29 @@ struct QuadraDetalheView: View {
             }
             
             // Botao Tela resumo
-            NavigationLink(destination:
-                            ResumoQuadraView(
-                                quadra: viewModel.quadra,
-                                onFinalizacaoSucesso: {
-                                    self.onSucesso()
-                                    presentationMode.wrappedValue.dismiss()
-                                }
-                            )
-            ) {
-                Text("Resumo da Quadra")
-                    .font(.headline)
-                    .foregroundColor(.black)
-                    .frame(maxWidth: .infinity)
-                    .padding()
-                    .background(Color.gray.opacity(0.2))
-                    .cornerRadius(10)
+            
+            if viewModel.quadra.status != .concluida{
+                
+                NavigationLink(destination:
+                                ResumoQuadraView(
+                                    quadra: viewModel.quadra,
+                                    onFinalizacaoSucesso: {
+                                        self.onSucesso()
+                                        presentationMode.wrappedValue.dismiss()
+                                    }
+                                )
+                ) {
+                    Text("Resumo da Quadra")
+                        .font(.headline)
+                        .foregroundColor(.black)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color.gray.opacity(0.2))
+                        .cornerRadius(10)
+                }
+                .padding()
             }
-            .padding()
+            
             
         }
         .task {

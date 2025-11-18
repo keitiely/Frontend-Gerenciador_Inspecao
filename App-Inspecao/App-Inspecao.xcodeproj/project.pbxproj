@@ -10,9 +10,22 @@
 		A2B643B82EC8B0D200B722D7 /* App-Inspecao.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "App-Inspecao.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		3FE5312E2ECAB0E0006FA8AA /* Exceptions for "App-Inspecao" folder in "App-Inspecao" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = A2B643B72EC8B0D200B722D7 /* App-Inspecao */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		A2B643BA2EC8B0D200B722D7 /* App-Inspecao */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				3FE5312E2ECAB0E0006FA8AA /* Exceptions for "App-Inspecao" folder in "App-Inspecao" target */,
+			);
 			path = "App-Inspecao";
 			sourceTree = "<group>";
 		};
@@ -253,9 +266,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = PMFLCRL2L8;
+				DEVELOPMENT_TEAM = MR7Z669DU4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "App-Inspecao/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -285,9 +299,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = PMFLCRL2L8;
+				DEVELOPMENT_TEAM = MR7Z669DU4;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "App-Inspecao/Info.plist";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
