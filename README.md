@@ -40,6 +40,7 @@ A interface e permissões mudam automaticamente conforme o tipo de usuário aute
 | Packages | SPM |
 | Banco de Dados | MySQL + MongoDB (backend) |
 | Backend | Node.js (API REST) |
+[Repositório Backend](https://github.com/kenaygn/Backend-Gerenciador_Inspecao)
 
 ---
 
